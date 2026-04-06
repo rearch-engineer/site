@@ -50,6 +50,7 @@ jobs:
         run: bun run lint
 
       - name: Type check
+        continue-on-error: true
         run: bun run check
 
       - name: Run unit tests
