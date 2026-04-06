@@ -99,14 +99,16 @@ const t = useTranslations(locale);
 
 // Get navigation items from i18n routes or custom nav
 const defaultNav = getNavRoutes(locale);
-const navItems: NavItem[] = nav || defaultNav.map(route => ({
-  label: t(route.label as any) || route.label,
-  href: route.path,
-}));
+const navItems: NavItem[] =
+  nav ||
+  defaultNav.map((route) => ({
+    label: t(route.label as any) || route.label,
+    href: route.path,
+  }));
 
 // Default external links if none provided via nav
 const defaultExternalLinks: NavItem[] = [
-  { label: t('footer.links.github'), href: 'https://github.com/lab34-es/rearch.engineer', external: true },
+  { label: t('footer.links.github'), href: 'https://github.com/rearch-engineer', external: true },
 ];
 
 // Add external links to nav if using default nav
@@ -141,11 +143,7 @@ const columnGrids: Record<NonNullable<Props['columns']>, string> = {
 };
 
 // Compute footer classes
-const footerClasses = cn(
-  'py-12',
-  backgrounds[background],
-  className
-);
+const footerClasses = cn('py-12', backgrounds[background], className);
 
 // Social platform to icon mapping
 const socialIcons: Record<string, string> = {
@@ -165,143 +163,69 @@ const displayTagline = tagline || t('site.description');
 
 <footer class={footerClasses} {...attrs}>
   <div class="mx-auto max-w-6xl px-6">
-    {layout === 'simple' && (
-      <>
-        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Logo & Tagline */}
-          {!hideLogo && (
-            <div class="flex flex-col items-center md:items-start gap-2">
-              {hasLogoSlot ? (
-                <slot name="logo" />
-              ) : (
-                <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
-                  <Logo size="sm" />
-                  <span class="font-display text-lg font-bold text-brand-500">
-                    {siteConfig.name}
-                  </span>
-                </a>
-              )}
-              {(hasTaglineSlot || displayTagline) && (
-                <p class={cn(
-                  'text-sm',
-                  background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
-                )}>
-                  {hasTaglineSlot ? <slot name="tagline" /> : displayTagline}
-                </p>
-              )}
-            </div>
-          )}
-
-          {/* Navigation Links */}
-          <nav class={cn(
-            'flex flex-wrap justify-center gap-6 md:gap-8 text-sm font-medium',
-            background === 'invert' ? 'text-on-invert/70' : 'text-foreground-muted'
-          )}>
-            {allNavItems.map((item) => (
-              <a
-                href={item.href}
-                class={cn(
-                  'transition-colors',
-                  background === 'invert' ? 'hover:text-on-invert' : 'hover:text-foreground'
+    {
+      layout === 'simple' && (
+        <>
+          <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+            {/* Logo & Tagline */}
+            {!hideLogo && (
+              <div class="flex flex-col items-center gap-2 md:items-start">
+                {hasLogoSlot ? (
+                  <slot name="logo" />
+                ) : (
+                  <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
+                    <Logo size="sm" />
+                    <span class="font-display text-brand-500 text-lg font-bold">
+                      {siteConfig.name}
+                    </span>
+                  </a>
                 )}
-                target={item.external || item.href.startsWith('http') ? '_blank' : undefined}
-                rel={item.external || item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Social Links */}
-          {showSocial && socialLinks.length > 0 && (
-            hasSocialSlot ? (
-              <slot name="social" />
-            ) : (
-              <div class="flex items-center gap-4">
-                {socialLinks.map((social) => (
-                  <a
-                    href={social.href}
+                {(hasTaglineSlot || displayTagline) && (
+                  <p
                     class={cn(
-                      'transition-colors',
-                      background === 'invert'
-                        ? 'text-on-invert/60 hover:text-on-invert'
-                        : 'text-foreground-muted hover:text-foreground'
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label || `Follow us on ${social.platform}`}
-                  >
-                    <Icon name={getSocialIcon(social.platform)} size="md" />
-                  </a>
-                ))}
-              </div>
-            )
-          )}
-        </div>
-
-        {/* Copyright & Legal for simple layout */}
-        {(showCopyright || legalLinks.length > 0) && (
-          <div class={cn(
-            'mt-8 pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4',
-            background === 'invert' ? 'border-on-invert/10' : 'border-border'
-          )}>
-            {showCopyright && (
-              <p class={cn(
-                'text-sm',
-                background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
-              )}>
-                {processedCopyright}
-              </p>
-            )}
-            {legalLinks.length > 0 && (
-              <div class="flex items-center gap-6">
-                {legalLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class={cn(
-                      'text-sm transition-colors',
-                      background === 'invert'
-                        ? 'text-on-invert/60 hover:text-on-invert'
-                        : 'text-foreground-muted hover:text-foreground'
+                      'text-sm',
+                      background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
                     )}
                   >
-                    {link.label}
-                  </a>
-                ))}
+                    {hasTaglineSlot ? <slot name="tagline" /> : displayTagline}
+                  </p>
+                )}
               </div>
             )}
-          </div>
-        )}
-      </>
-    )}
 
-    {layout === 'columns' && (
-      <>
-        <div class={cn('grid grid-cols-1 gap-8', columnGrids[columns])}>
-          {/* Logo Column */}
-          {!hideLogo && (
-            <div class="space-y-4">
-              {hasLogoSlot ? (
-                <slot name="logo" />
-              ) : (
-                <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
-                  <Logo size="sm" />
-                  <span class="font-display text-lg font-bold text-brand-500">
-                    {siteConfig.name}
-                  </span>
+            {/* Navigation Links */}
+            <nav
+              class={cn(
+                'flex flex-wrap justify-center gap-6 text-sm font-medium md:gap-8',
+                background === 'invert' ? 'text-on-invert/70' : 'text-foreground-muted'
+              )}
+            >
+              {allNavItems.map((item) => (
+                <a
+                  href={item.href}
+                  class={cn(
+                    'transition-colors',
+                    background === 'invert' ? 'hover:text-on-invert' : 'hover:text-foreground'
+                  )}
+                  target={item.external || item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={
+                    item.external || item.href.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                >
+                  {item.label}
                 </a>
-              )}
-              {(hasTaglineSlot || displayTagline) && (
-                <p class={cn(
-                  'text-sm max-w-xs',
-                  background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
-                )}>
-                  {hasTaglineSlot ? <slot name="tagline" /> : displayTagline}
-                </p>
-              )}
-              {/* Social Links in columns layout */}
-              {showSocial && socialLinks.length > 0 && (
-                <div class="flex items-center gap-4 pt-2">
+              ))}
+            </nav>
+
+            {/* Social Links */}
+            {showSocial &&
+              socialLinks.length > 0 &&
+              (hasSocialSlot ? (
+                <slot name="social" />
+              ) : (
+                <div class="flex items-center gap-4">
                   {socialLinks.map((social) => (
                     <a
                       href={social.href}
@@ -319,204 +243,321 @@ const displayTagline = tagline || t('site.description');
                     </a>
                   ))}
                 </div>
+              ))}
+          </div>
+
+          {/* Copyright & Legal for simple layout */}
+          {(showCopyright || legalLinks.length > 0) && (
+            <div
+              class={cn(
+                'mt-8 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row',
+                background === 'invert' ? 'border-on-invert/10' : 'border-border'
+              )}
+            >
+              {showCopyright && (
+                <p
+                  class={cn(
+                    'text-sm',
+                    background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
+                  )}
+                >
+                  {processedCopyright}
+                </p>
+              )}
+              {legalLinks.length > 0 && (
+                <div class="flex items-center gap-6">
+                  {legalLinks.map((link) => (
+                    <a
+                      href={link.href}
+                      class={cn(
+                        'text-sm transition-colors',
+                        background === 'invert'
+                          ? 'text-on-invert/60 hover:text-on-invert'
+                          : 'text-foreground-muted hover:text-foreground'
+                      )}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
               )}
             </div>
           )}
+        </>
+      )
+    }
 
-          {/* Link Groups */}
-          {hasColumnsSlot ? (
-            <slot name="columns" />
-          ) : (
-            linkGroups.map((group) => (
+    {
+      layout === 'columns' && (
+        <>
+          <div class={cn('grid grid-cols-1 gap-8', columnGrids[columns])}>
+            {/* Logo Column */}
+            {!hideLogo && (
               <div class="space-y-4">
-                <h3 class={cn(
-                  'font-semibold text-sm',
-                  background === 'invert' ? 'text-on-invert' : 'text-foreground'
-                )}>
-                  {group.title}
-                </h3>
-                <ul class="space-y-2">
-                  {group.links.map((link) => (
-                    <li>
-                      <a
-                        href={link.href}
-                        class={cn(
-                          'text-sm transition-colors',
-                          background === 'invert'
-                            ? 'text-on-invert/70 hover:text-on-invert'
-                            : 'text-foreground-muted hover:text-foreground'
-                        )}
-                        target={link.external || link.href.startsWith('http') ? '_blank' : undefined}
-                        rel={link.external || link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* Bottom section */}
-        {(showCopyright || legalLinks.length > 0) && (
-          <div class={cn(
-            'mt-12 pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4',
-            background === 'invert' ? 'border-on-invert/10' : 'border-border'
-          )}>
-            {hasBottomSlot ? (
-              <slot name="bottom" />
-            ) : (
-              <>
-                {showCopyright && (
-                  <p class={cn(
-                    'text-sm',
-                    background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
-                  )}>
-                    {processedCopyright}
+                {hasLogoSlot ? (
+                  <slot name="logo" />
+                ) : (
+                  <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
+                    <Logo size="sm" />
+                    <span class="font-display text-brand-500 text-lg font-bold">
+                      {siteConfig.name}
+                    </span>
+                  </a>
+                )}
+                {(hasTaglineSlot || displayTagline) && (
+                  <p
+                    class={cn(
+                      'max-w-xs text-sm',
+                      background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
+                    )}
+                  >
+                    {hasTaglineSlot ? <slot name="tagline" /> : displayTagline}
                   </p>
                 )}
-                {legalLinks.length > 0 && (
-                  <div class="flex items-center gap-6">
-                    {legalLinks.map((link) => (
+                {/* Social Links in columns layout */}
+                {showSocial && socialLinks.length > 0 && (
+                  <div class="flex items-center gap-4 pt-2">
+                    {socialLinks.map((social) => (
                       <a
-                        href={link.href}
+                        href={social.href}
                         class={cn(
-                          'text-sm transition-colors',
+                          'transition-colors',
                           background === 'invert'
                             ? 'text-on-invert/60 hover:text-on-invert'
                             : 'text-foreground-muted hover:text-foreground'
                         )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.label || `Follow us on ${social.platform}`}
                       >
-                        {link.label}
+                        <Icon name={getSocialIcon(social.platform)} size="md" />
                       </a>
                     ))}
                   </div>
                 )}
-              </>
-            )}
-          </div>
-        )}
-      </>
-    )}
-
-    {layout === 'minimal' && (
-      <div class="text-center">
-        {showCopyright && (
-          <p class={cn(
-            'text-sm',
-            background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
-          )}>
-            {processedCopyright}
-          </p>
-        )}
-      </div>
-    )}
-
-    {layout === 'stacked' && (
-      <div class="flex flex-col items-center gap-8 text-center">
-        {/* Logo */}
-        {!hideLogo && (
-          hasLogoSlot ? (
-            <slot name="logo" />
-          ) : (
-            <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
-              <Logo size="md" />
-              <span class="font-display text-xl font-bold text-brand-500">
-                {siteConfig.name}
-              </span>
-            </a>
-          )
-        )}
-
-        {/* Tagline */}
-        {(hasTaglineSlot || displayTagline) && (
-          <p class={cn(
-            'text-sm max-w-md',
-            background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
-          )}>
-            {hasTaglineSlot ? <slot name="tagline" /> : displayTagline}
-          </p>
-        )}
-
-        {/* Navigation Links */}
-        <nav class={cn(
-          'flex flex-wrap justify-center gap-6 text-sm font-medium',
-          background === 'invert' ? 'text-on-invert/70' : 'text-foreground-muted'
-        )}>
-          {allNavItems.map((item) => (
-            <a
-              href={item.href}
-              class={cn(
-                'transition-colors',
-                background === 'invert' ? 'hover:text-on-invert' : 'hover:text-foreground'
-              )}
-              target={item.external || item.href.startsWith('http') ? '_blank' : undefined}
-              rel={item.external || item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Social Links */}
-        {showSocial && socialLinks.length > 0 && (
-          <div class="flex items-center gap-4">
-            {socialLinks.map((social) => (
-              <a
-                href={social.href}
-                class={cn(
-                  'transition-colors',
-                  background === 'invert'
-                    ? 'text-on-invert/60 hover:text-on-invert'
-                    : 'text-foreground-muted hover:text-foreground'
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label || `Follow us on ${social.platform}`}
-              >
-                <Icon name={getSocialIcon(social.platform)} size="md" />
-              </a>
-            ))}
-          </div>
-        )}
-
-        {/* Copyright & Legal */}
-        {(showCopyright || legalLinks.length > 0) && (
-          <div class={cn(
-            'pt-8 border-t w-full flex flex-col items-center gap-4',
-            background === 'invert' ? 'border-on-invert/10' : 'border-border'
-          )}>
-            {showCopyright && (
-              <p class={cn(
-                'text-sm',
-                background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
-              )}>
-                {processedCopyright}
-              </p>
-            )}
-            {legalLinks.length > 0 && (
-              <div class="flex items-center gap-6">
-                {legalLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    class={cn(
-                      'text-sm transition-colors',
-                      background === 'invert'
-                        ? 'text-on-invert/60 hover:text-on-invert'
-                        : 'text-foreground-muted hover:text-foreground'
-                    )}
-                  >
-                    {link.label}
-                  </a>
-                ))}
               </div>
             )}
+
+            {/* Link Groups */}
+            {hasColumnsSlot ? (
+              <slot name="columns" />
+            ) : (
+              linkGroups.map((group) => (
+                <div class="space-y-4">
+                  <h3
+                    class={cn(
+                      'text-sm font-semibold',
+                      background === 'invert' ? 'text-on-invert' : 'text-foreground'
+                    )}
+                  >
+                    {group.title}
+                  </h3>
+                  <ul class="space-y-2">
+                    {group.links.map((link) => (
+                      <li>
+                        <a
+                          href={link.href}
+                          class={cn(
+                            'text-sm transition-colors',
+                            background === 'invert'
+                              ? 'text-on-invert/70 hover:text-on-invert'
+                              : 'text-foreground-muted hover:text-foreground'
+                          )}
+                          target={
+                            link.external || link.href.startsWith('http') ? '_blank' : undefined
+                          }
+                          rel={
+                            link.external || link.href.startsWith('http')
+                              ? 'noopener noreferrer'
+                              : undefined
+                          }
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            )}
           </div>
-        )}
-      </div>
-    )}
+
+          {/* Bottom section */}
+          {(showCopyright || legalLinks.length > 0) && (
+            <div
+              class={cn(
+                'mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row',
+                background === 'invert' ? 'border-on-invert/10' : 'border-border'
+              )}
+            >
+              {hasBottomSlot ? (
+                <slot name="bottom" />
+              ) : (
+                <>
+                  {showCopyright && (
+                    <p
+                      class={cn(
+                        'text-sm',
+                        background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
+                      )}
+                    >
+                      {processedCopyright}
+                    </p>
+                  )}
+                  {legalLinks.length > 0 && (
+                    <div class="flex items-center gap-6">
+                      {legalLinks.map((link) => (
+                        <a
+                          href={link.href}
+                          class={cn(
+                            'text-sm transition-colors',
+                            background === 'invert'
+                              ? 'text-on-invert/60 hover:text-on-invert'
+                              : 'text-foreground-muted hover:text-foreground'
+                          )}
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          )}
+        </>
+      )
+    }
+
+    {
+      layout === 'minimal' && (
+        <div class="text-center">
+          {showCopyright && (
+            <p
+              class={cn(
+                'text-sm',
+                background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
+              )}
+            >
+              {processedCopyright}
+            </p>
+          )}
+        </div>
+      )
+    }
+
+    {
+      layout === 'stacked' && (
+        <div class="flex flex-col items-center gap-8 text-center">
+          {/* Logo */}
+          {!hideLogo &&
+            (hasLogoSlot ? (
+              <slot name="logo" />
+            ) : (
+              <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
+                <Logo size="md" />
+                <span class="font-display text-brand-500 text-xl font-bold">{siteConfig.name}</span>
+              </a>
+            ))}
+
+          {/* Tagline */}
+          {(hasTaglineSlot || displayTagline) && (
+            <p
+              class={cn(
+                'max-w-md text-sm',
+                background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
+              )}
+            >
+              {hasTaglineSlot ? <slot name="tagline" /> : displayTagline}
+            </p>
+          )}
+
+          {/* Navigation Links */}
+          <nav
+            class={cn(
+              'flex flex-wrap justify-center gap-6 text-sm font-medium',
+              background === 'invert' ? 'text-on-invert/70' : 'text-foreground-muted'
+            )}
+          >
+            {allNavItems.map((item) => (
+              <a
+                href={item.href}
+                class={cn(
+                  'transition-colors',
+                  background === 'invert' ? 'hover:text-on-invert' : 'hover:text-foreground'
+                )}
+                target={item.external || item.href.startsWith('http') ? '_blank' : undefined}
+                rel={
+                  item.external || item.href.startsWith('http') ? 'noopener noreferrer' : undefined
+                }
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Social Links */}
+          {showSocial && socialLinks.length > 0 && (
+            <div class="flex items-center gap-4">
+              {socialLinks.map((social) => (
+                <a
+                  href={social.href}
+                  class={cn(
+                    'transition-colors',
+                    background === 'invert'
+                      ? 'text-on-invert/60 hover:text-on-invert'
+                      : 'text-foreground-muted hover:text-foreground'
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label || `Follow us on ${social.platform}`}
+                >
+                  <Icon name={getSocialIcon(social.platform)} size="md" />
+                </a>
+              ))}
+            </div>
+          )}
+
+          {/* Copyright & Legal */}
+          {(showCopyright || legalLinks.length > 0) && (
+            <div
+              class={cn(
+                'flex w-full flex-col items-center gap-4 border-t pt-8',
+                background === 'invert' ? 'border-on-invert/10' : 'border-border'
+              )}
+            >
+              {showCopyright && (
+                <p
+                  class={cn(
+                    'text-sm',
+                    background === 'invert' ? 'text-on-invert/60' : 'text-foreground-muted'
+                  )}
+                >
+                  {processedCopyright}
+                </p>
+              )}
+              {legalLinks.length > 0 && (
+                <div class="flex items-center gap-6">
+                  {legalLinks.map((link) => (
+                    <a
+                      href={link.href}
+                      class={cn(
+                        'text-sm transition-colors',
+                        background === 'invert'
+                          ? 'text-on-invert/60 hover:text-on-invert'
+                          : 'text-foreground-muted hover:text-foreground'
+                      )}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )
+    }
   </div>
 
   {/* Default slot for additional content */}

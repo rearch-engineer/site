@@ -26,10 +26,11 @@ const t = useTranslations(locale);
   routeId="contact"
 >
   <Hero layout="centered" size="sm" showGrid>
-    <Badge slot="badge" pill pulse>{t('contact.hero.badge')}</Badge>
+    <!--<Badge slot="badge" pill pulse>{t('contact.hero.badge')}</Badge>-->
 
     <h1 slot="title">
-      {t('contact.hero.title')} <span class="text-brand-500">{t('contact.hero.titleHighlight')}</span>
+      {t('contact.hero.title')}
+      <span class="text-brand-500">{t('contact.hero.titleHighlight')}</span>
     </h1>
 
     <p slot="description">
@@ -38,12 +39,14 @@ const t = useTranslations(locale);
   </Hero>
 
   <!-- Contact Form Section -->
-  <section class="py-20 bg-surface-secondary">
+  <section class="bg-surface-secondary py-20">
     <div class="mx-auto max-w-6xl px-6">
       <div class="grid gap-12 lg:grid-cols-2">
         <!-- Form -->
         <Card padding="lg">
-          <h2 class="text-2xl font-display font-bold text-foreground mb-6">{t('contact.form.title')}</h2>
+          <h2 class="font-display text-foreground mb-6 text-2xl font-bold">
+            {t('contact.form.title')}
+          </h2>
 
           <form id="contact-form" action="/api/contact" method="POST" class="space-y-6">
             <Input
@@ -95,7 +98,7 @@ const t = useTranslations(locale);
 
         <!-- Contact Info -->
         <div class="flex flex-col justify-center">
-          <h2 class="font-display text-2xl font-bold text-foreground mb-8">
+          <h2 class="font-display text-foreground mb-8 text-2xl font-bold">
             {t('contact.info.title')}
           </h2>
 
@@ -104,12 +107,14 @@ const t = useTranslations(locale);
             <a href={`mailto:${siteConfig.email}`} class="block">
               <Card hover padding="sm">
                 <div class="flex items-center gap-4">
-                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+                  <div
+                    class="from-brand-500/20 to-brand-500/5 text-brand-500 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br"
+                  >
                     <Icon name="mail" size="md" />
                   </div>
                   <div>
-                    <p class="text-sm text-foreground-muted">{t('contact.info.email.label')}</p>
-                    <p class="font-medium text-foreground">{siteConfig.email}</p>
+                    <p class="text-foreground-muted text-sm">{t('contact.info.email.label')}</p>
+                    <p class="text-foreground font-medium">{siteConfig.email}</p>
                   </div>
                 </div>
               </Card>
@@ -117,25 +122,25 @@ const t = useTranslations(locale);
 
             <!-- GitHub -->
             <a
-              href="https://github.com/lab34-es/rearch.engineer"
+              href="https://github.com/rearch-engineer"
               target="_blank"
               rel="noopener noreferrer"
               class="block"
             >
               <Card hover padding="sm">
                 <div class="flex items-center gap-4">
-                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+                  <div
+                    class="from-brand-500/20 to-brand-500/5 text-brand-500 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br"
+                  >
                     <Icon name="github" size="md" />
                   </div>
                   <div>
-                    <p class="text-sm text-foreground-muted">{t('contact.info.github.label')}</p>
-                    <p class="font-medium text-foreground">lab34-es/rearch.engineer</p>
+                    <p class="text-foreground-muted text-sm">{t('contact.info.github.label')}</p>
+                    <p class="text-foreground font-medium">lab34-es/rearch.engineer</p>
                   </div>
                 </div>
               </Card>
             </a>
-
-
           </div>
         </div>
       </div>
@@ -172,7 +177,9 @@ const t = useTranslations(locale);
           message.className = 'text-sm text-success';
           form.reset();
         } else {
-          const errors = data.errors ? Object.values(data.errors).flat().join(', ') : 'Something went wrong';
+          const errors = data.errors
+            ? Object.values(data.errors).flat().join(', ')
+            : 'Something went wrong';
           message.textContent = errors;
           message.className = 'text-sm text-destructive';
         }

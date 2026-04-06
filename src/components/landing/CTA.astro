@@ -113,94 +113,104 @@ const hasActionsSlot = Astro.slots.has('actions');
 const buttonId = `copy-command-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
-<section
-  id={id}
-  class={cn(sectionStyles[variant], sizes[size], className)}
-  {...attrs}
->
+<section id={id} class={cn(sectionStyles[variant], sizes[size], className)} {...attrs}>
   <div class="mx-auto max-w-6xl px-6">
     <div class={cn(maxWidths[maxWidth], 'text-center mx-auto')}>
       {/* Logo Slot */}
-      {hasLogoSlot ? (
-        <div class="mb-[var(--space-stack-lg)]">
-          <slot name="logo" />
-        </div>
-      ) : (
-        <Logo
-          size="2xl"
-          forceDark={isInvert}
-          class="mb-[var(--space-stack-lg)] mx-auto"
-        />
-      )}
+      {
+        hasLogoSlot ? (
+          <div class="mb-[var(--space-stack-lg)]">
+            <slot name="logo" />
+          </div>
+        ) : (
+          <Logo size="2xl" forceDark={isInvert} class="mx-auto mb-[var(--space-stack-lg)]" />
+        )
+      }
 
       {/* Heading Slot */}
-      {hasHeadingSlot ? (
-        <div class={cn(
-          'mb-[var(--space-heading-gap)]',
-          '[&>h2]:font-display [&>h2]:text-3xl md:[&>h2]:text-4xl lg:[&>h2]:text-5xl [&>h2]:font-bold [&>h2]:text-balance',
-          isInvert ? '[&>h2]:text-on-invert' : '[&>h2]:text-foreground'
-        )}>
-          <slot name="heading" />
-        </div>
-      ) : (
-        <h2
-          class={cn(
-            'font-display text-3xl md:text-4xl lg:text-5xl font-bold text-balance mb-[var(--space-heading-gap)]',
-            headingStyles[variant]
-          )}
-          set:html={processHeading(displayHeading, displayHighlight)}
-        />
-      )}
+      {
+        hasHeadingSlot ? (
+          <div
+            class={cn(
+              'mb-[var(--space-heading-gap)]',
+              '[&>h2]:font-display [&>h2]:text-3xl [&>h2]:font-bold [&>h2]:text-balance md:[&>h2]:text-4xl lg:[&>h2]:text-5xl',
+              isInvert ? '[&>h2]:text-on-invert' : '[&>h2]:text-foreground'
+            )}
+          >
+            <slot name="heading" />
+          </div>
+        ) : (
+          <h2
+            class={cn(
+              'font-display mb-[var(--space-heading-gap)] text-3xl font-bold text-balance md:text-4xl lg:text-5xl',
+              headingStyles[variant]
+            )}
+            set:html={processHeading(displayHeading, displayHighlight)}
+          />
+        )
+      }
 
       {/* Description Slot */}
-      {hasDescriptionSlot ? (
-        <div class={cn(
-          'text-lg md:text-xl mb-[var(--space-stack-lg)]',
-          '[&>p]:text-lg md:[&>p]:text-xl',
-          isInvert ? 'text-on-invert-secondary [&>p]:text-on-invert-secondary' : 'text-foreground-muted [&>p]:text-foreground-muted'
-        )}>
-          <slot name="description" />
-        </div>
-      ) : (
-        <p class={cn('text-lg md:text-xl mb-[var(--space-stack-lg)]', descriptionStyles[variant])}>
-          {displayDescription}
-        </p>
-      )}
+      {
+        hasDescriptionSlot ? (
+          <div
+            class={cn(
+              'mb-[var(--space-stack-lg)] text-lg md:text-xl',
+              '[&>p]:text-lg md:[&>p]:text-xl',
+              isInvert
+                ? 'text-on-invert-secondary [&>p]:text-on-invert-secondary'
+                : 'text-foreground-muted [&>p]:text-foreground-muted'
+            )}
+          >
+            <slot name="description" />
+          </div>
+        ) : (
+          <p
+            class={cn('mb-[var(--space-stack-lg)] text-lg md:text-xl', descriptionStyles[variant])}
+          >
+            {displayDescription}
+          </p>
+        )
+      }
 
       {/* Actions Slot */}
-      {hasActionsSlot ? (
-        <div class="flex flex-col gap-4 sm:flex-row items-center justify-center">
-          <slot name="actions" />
-        </div>
-      ) : showCopyCommand && (
-        <div class="flex flex-col gap-4 sm:flex-row items-center justify-center">
-          <button
-            type="button"
-            id={buttonId}
-            class="bg-foreground text-background hover:bg-foreground/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center gap-2 rounded-md px-5 text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98]"
-            data-command={displayCommand}
-            data-copied={copiedText}
-          >
-            <Icon name="terminal" size="md" />
-            <span class="command-text">{displayCommand}</span>
-            <span class="copy-icon text-secondary ml-1">
-              <Icon name="copy" size="sm" />
-            </span>
-            <span class="check-icon text-success ml-1 hidden">
-              <Icon name="check" size="sm" />
-            </span>
-          </button>
-          <Button
-            variant="outline"
-            size="lg"
-            href="https://github.com/lab34-es/rearch.engineer"
-            target="_blank"
-          >
-            <Icon name="book" size="md" />
-            {docsLabel}
-          </Button>
-        </div>
-      )}
+      {
+        hasActionsSlot ? (
+          <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <slot name="actions" />
+          </div>
+        ) : (
+          showCopyCommand && (
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <button
+                type="button"
+                id={buttonId}
+                class="bg-foreground text-background hover:bg-foreground/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center gap-2 rounded-md px-5 text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98]"
+                data-command={displayCommand}
+                data-copied={copiedText}
+              >
+                <Icon name="terminal" size="md" />
+                <span class="command-text">{displayCommand}</span>
+                <span class="copy-icon text-secondary ml-1">
+                  <Icon name="copy" size="sm" />
+                </span>
+                <span class="check-icon text-success ml-1 hidden">
+                  <Icon name="check" size="sm" />
+                </span>
+              </button>
+              <Button
+                variant="outline"
+                size="lg"
+                href="https://github.com/rearch-engineer"
+                target="_blank"
+              >
+                <Icon name="book" size="md" />
+                {docsLabel}
+              </Button>
+            </div>
+          )
+        )
+      }
 
       <slot />
     </div>

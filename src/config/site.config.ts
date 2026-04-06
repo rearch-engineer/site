@@ -55,7 +55,7 @@ const siteConfig: SiteConfig = {
   ogImage: '/og-default.png',
   author: 'Lab34',
   email: 'hello@rearch.engineer',
-  socialLinks: ['https://github.com/lab34-es/rearch.engineer'],
+  socialLinks: ['https://github.com/rearch-engineer'],
   twitter: {
     site: '@rearch_eng',
     creator: '@rearch_eng',

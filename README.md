@@ -33,7 +33,7 @@ ReArch is an AI background agent that writes, tests, and ships code — so every
 
 ```bash
 # Clone
-git clone https://github.com/lab34-es/rearch.engineer.git my-project
+git clone https://github.com/rearch-engineer.git my-project
 cd my-project
 
 # Install (requires Node 22.12+)
