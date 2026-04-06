@@ -14,7 +14,7 @@ import { routes, type RouteId, isValidRouteId } from './routes';
 /**
  * Get the localized URL path for a route
  *
- * @param routeId - The internal route identifier (e.g., 'about', 'blog')
+ * @param routeId - The internal route identifier (e.g., 'contact', 'cloud')
  * @param locale - The target locale
  * @returns The full path with locale prefix if needed
  *
@@ -63,7 +63,7 @@ const pathLookup = buildPathLookup();
 export type ResolvedRoute = {
   routeId: RouteId;
   locale: Locale;
-  /** Extra path segments after the route (e.g., blog post slug) */
+  /** Extra path segments after the route (e.g., sub-page slug) */
   extra?: string;
 };
 
@@ -76,8 +76,6 @@ export type ResolvedRoute = {
  * @example
  * resolveRouteFromPath('/about')           // → { routeId: 'about', locale: 'en' }
  * resolveRouteFromPath('/es/sobre-nosotros') // → { routeId: 'about', locale: 'es' }
- * resolveRouteFromPath('/blog/my-post')    // → { routeId: 'blog', locale: 'en', extra: 'my-post' }
- * resolveRouteFromPath('/es/blog/my-post') // → { routeId: 'blog', locale: 'es', extra: 'my-post' }
  * resolveRouteFromPath('/unknown')         // → null
  */
 export function resolveRouteFromPath(pathname: string): ResolvedRoute | null {
@@ -114,7 +112,7 @@ export function resolveRouteFromPath(pathname: string): ResolvedRoute | null {
     return { routeId: 'home', locale: segments[0] as Locale };
   }
 
-  // Handle nested routes like blog posts: /blog/my-post or /es/blog/my-post
+  // Handle nested routes: /section/sub-page or /es/section/sub-page
   // Check if the first slug segment matches a known route
   if (slugSegments.length > 1) {
     const firstSlug = slugSegments[0];
@@ -131,7 +129,7 @@ export function resolveRouteFromPath(pathname: string): ResolvedRoute | null {
       };
     }
 
-    // Also check for translated blog slugs (e.g., /es/blog/mi-post)
+    // Also check for translated slugs (e.g., /es/seccion/mi-pagina)
     // We need to find which route this slug belongs to
     for (const [routeId, routeSlugs] of Object.entries(routes)) {
       if (routeSlugs[locale] === firstSlug) {
@@ -158,7 +156,6 @@ export function resolveRouteFromPath(pathname: string): ResolvedRoute | null {
  * @example
  * switchLocale('/about', 'es')               // → '/es/sobre-nosotros'
  * switchLocale('/es/sobre-nosotros', 'en')   // → '/about'
- * switchLocale('/blog/my-post', 'es')        // → '/es/blog/my-post'
  * switchLocale('/unknown', 'es')             // → '/es' (fallback to home)
  */
 export function switchLocale(currentPath: string, targetLocale: Locale): string {
@@ -167,7 +164,7 @@ export function switchLocale(currentPath: string, targetLocale: Locale): string 
   if (resolved) {
     const basePath = getLocalizedPath(resolved.routeId, targetLocale);
 
-    // If there's extra path info (like blog post slug), append it
+    // If there's extra path info (like a sub-page slug), append it
     if (resolved.extra) {
       // Ensure we don't double-slash
       const separator = basePath.endsWith('/') ? '' : '/';
@@ -247,8 +244,6 @@ export type NavRoute = {
  * const navRoutes = getNavRoutes('en');
  * // → [
  * //   { routeId: 'components', label: 'nav.components', order: 1, path: '/components' },
- * //   { routeId: 'blog', label: 'nav.blog', order: 2, path: '/blog' },
- * //   { routeId: 'about', label: 'nav.about', order: 3, path: '/about' },
  * //   { routeId: 'contact', label: 'nav.contact', order: 4, path: '/contact' },
  * // ]
  */

@@ -59,13 +59,6 @@ export const routes = {
     nav: { show: true, order: 4, label: 'nav.contact' },
   },
 
-  // Blog section
-  blog: {
-    en: 'blog',
-    es: 'blog',
-    nav: { show: true, order: 2, label: 'nav.blog' },
-  },
-
   // Cloud page
   cloud: {
     en: 'cloud',

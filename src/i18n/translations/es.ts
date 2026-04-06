@@ -13,7 +13,7 @@ export const es: TranslationKeys = {
   // Navigation
   nav: {
     home: 'Inicio',
-    blog: 'Blog',
+    changelog: 'Changelog',
     contact: 'Contacto',
     docs: 'Docs',
     getStarted: 'Solicitar Acceso',
@@ -228,21 +228,6 @@ export const es: TranslationKeys = {
     sending: 'Enviando...',
     success: '¡Mensaje enviado con éxito!',
     error: 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.',
-  },
-
-  // Blog
-  blog: {
-    title: 'Blog',
-    description: 'Últimos artículos y actualizaciones del equipo de ReArch',
-    allPosts: 'Todos los artículos',
-    featured: 'Destacados',
-    noPosts: 'No se encontraron artículos',
-    relatedPosts: 'Artículos relacionados',
-    backToBlog: 'Volver al Blog',
-    subscribe: 'Suscríbete',
-    subscribeDescription: 'Recibe los últimos artículos y actualizaciones en tu correo.',
-    emailPlaceholder: 'Introduce tu correo',
-    subscribeButton: 'Suscribirse',
   },
 
   // Components Page

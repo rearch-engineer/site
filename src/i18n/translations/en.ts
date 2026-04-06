@@ -11,7 +11,7 @@ export const en = {
   // Navigation
   nav: {
     home: 'Home',
-    blog: 'Blog',
+    changelog: 'Changelog',
     contact: 'Contact',
     docs: 'Docs',
     getStarted: 'Request Access',
@@ -226,21 +226,6 @@ export const en = {
     sending: 'Sending...',
     success: 'Message sent successfully!',
     error: 'Failed to send message. Please try again.',
-  },
-
-  // Blog
-  blog: {
-    title: 'Blog',
-    description: 'Latest articles and updates from the ReArch team',
-    allPosts: 'All posts',
-    featured: 'Featured',
-    noPosts: 'No posts found',
-    relatedPosts: 'Related Posts',
-    backToBlog: 'Back to Blog',
-    subscribe: 'Subscribe',
-    subscribeDescription: 'Get the latest articles and updates delivered to your inbox.',
-    emailPlaceholder: 'Enter your email',
-    subscribeButton: 'Subscribe',
   },
 
   // Components Page

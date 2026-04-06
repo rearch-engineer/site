@@ -126,9 +126,6 @@ for (const locale of locales) {
     <!-- Canonical URL -->
     <link rel="canonical" href={new URL(Astro.url.pathname, siteConfig.url).toString()} />
 
-    <!-- RSS Feed -->
-    <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} RSS Feed`} href="/rss.xml" />
-
     <!-- Alternate language links for SEO (uses translated URLs when routeId provided) -->
     <Hreflang routeId={routeId} />
 
@@ -192,7 +189,7 @@ for (const locale of locales) {
           // Home page
           targetPath = '/' + matchedLocale + '/';
         } else if (translatedFirstSegment !== undefined) {
-          // Known route - translate the first segment, keep the rest (e.g. blog post slugs)
+          // Known route - translate the first segment, keep the rest
           const rest = segments.slice(1).join('/');
           const translatedSlug = translatedFirstSegment;
           targetPath = '/' + matchedLocale + (translatedSlug ? '/' + translatedSlug : '');

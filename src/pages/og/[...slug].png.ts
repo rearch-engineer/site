@@ -1,5 +1,4 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { getCollection } from 'astro:content';
 import { generateOGImage } from '@/lib/og';
 import siteConfig from '@/config/site.config';
 
@@ -7,30 +6,10 @@ import siteConfig from '@/config/site.config';
 const STATIC_PAGES = [
   { slug: 'index', title: siteConfig.name, description: siteConfig.description },
   { slug: 'contact', title: 'Contact', description: `Get in touch with ${siteConfig.name}` },
-  {
-    slug: 'blog',
-    title: 'Blog',
-    description: `Latest articles and updates from ${siteConfig.name}`,
-  },
   { slug: 'components', title: 'Component Library', description: 'UI component showcase' },
 ];
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Get all blog posts
-  const blogPosts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
-
-  // Generate paths for blog posts
-  const blogPaths = blogPosts.map((post) => ({
-    params: { slug: `blog/${post.id}` },
-    props: {
-      title: post.data.title,
-      description: post.data.description,
-      type: 'article' as const,
-    },
-  }));
-
   // Generate paths for static pages
   const staticPaths = STATIC_PAGES.map((page) => ({
     params: { slug: page.slug },
@@ -41,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   }));
 
-  return [...staticPaths, ...blogPaths];
+  return staticPaths;
 };
 
 export const GET: APIRoute = async ({ props }) => {

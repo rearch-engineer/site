@@ -111,6 +111,7 @@ const isInvert = colorScheme === 'invert';
 // Get navigation items from i18n routes or custom nav
 const defaultNav = getNavRoutes(locale);
 const docsItem: NavItem = { label: t('nav.docs'), href: 'https://docs.rearch.engineer' };
+const changelogItem: NavItem = { label: t('nav.changelog'), href: 'https://docs.rearch.engineer/releases/changelog/' };
 // Insert Docs before Contact: split routes into non-contact and contact, place Docs in between
 const nonContactRoutes = defaultNav.filter((route) => route.routeId !== 'contact');
 const contactRoute = defaultNav.find((route) => route.routeId === 'contact');
@@ -120,6 +121,7 @@ const navItems: NavItem[] = nav || [
     label: t(route.label as any) || route.label,
     href: route.path,
   })),
+  changelogItem,
   docsItem,
   ...(contactRoute
     ? [{ label: t(contactRoute.label as any) || contactRoute.label, href: contactRoute.path }]

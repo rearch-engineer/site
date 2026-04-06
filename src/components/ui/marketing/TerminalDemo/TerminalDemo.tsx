@@ -41,7 +41,7 @@ const script: ScriptLine[] = [
   { text: '◇  Include demo landing page and sample content?', delay: 400, type: 'select-label' },
   { text: '│  ○ No  · Minimal starter with basic pages', delay: 300, type: 'select-option' },
   {
-    text: '│  ● Yes · Full demo with landing page, blog posts',
+    text: '│  ● Yes · Full demo with landing page, sample content',
     delay: 600,
     type: 'select-option-active',
   },
