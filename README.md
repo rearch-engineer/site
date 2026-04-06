@@ -12,20 +12,20 @@ This is the official ReArch website.
 
 ```bash
 # Clone
-git clone hgit@github.com:rearch-engineer/site.git
+git clone git@github.com:rearch-engineer/site.git
 cd site
 
 # Install dependencies
 bun i
 
 # Develop
-bun run dev
+bun dev
 
 # Type checking
-bun run check
+bun check
 
 # Linting
-bun run lint
+bun lint
 ```
 
 ## Project Structure
