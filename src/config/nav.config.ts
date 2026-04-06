@@ -14,7 +14,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { label: 'Components', href: '/components', order: 1 },
   { label: 'Blog', href: '/blog', order: 2 },
-  { label: 'Docs', href: '/docs/', order: 4 },
+  { label: 'Docs', href: 'https://docs.rearch.engineer', order: 4 },
   { label: 'Contact', href: '/contact', order: 5 },
 ];
 

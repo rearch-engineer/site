@@ -92,7 +92,7 @@ const {
   cta = { label: 'Get Started', href: '/cloud' },
   actions = [],
   showThemeToggle = true,
-   showLanguageSwitcher = false,
+  showLanguageSwitcher = false,
   showMobileMenu = true,
   showActiveState = true,
   logoText,
@@ -110,30 +110,31 @@ const isInvert = colorScheme === 'invert';
 
 // Get navigation items from i18n routes or custom nav
 const defaultNav = getNavRoutes(locale);
-const docsItem: NavItem = { label: t('nav.docs'), href: '/docs/' };
+const docsItem: NavItem = { label: t('nav.docs'), href: 'https://docs.rearch.engineer' };
 // Insert Docs before Contact: split routes into non-contact and contact, place Docs in between
-const nonContactRoutes = defaultNav.filter(route => route.routeId !== 'contact');
-const contactRoute = defaultNav.find(route => route.routeId === 'contact');
+const nonContactRoutes = defaultNav.filter((route) => route.routeId !== 'contact');
+const contactRoute = defaultNav.find((route) => route.routeId === 'contact');
 const navItems: NavItem[] = nav || [
   ...extraNav,
-  ...nonContactRoutes.map(route => ({
+  ...nonContactRoutes.map((route) => ({
     label: t(route.label as any) || route.label,
     href: route.path,
   })),
   docsItem,
-  ...(contactRoute ? [{ label: t(contactRoute.label as any) || contactRoute.label, href: contactRoute.path }] : []),
+  ...(contactRoute
+    ? [{ label: t(contactRoute.label as any) || contactRoute.label, href: contactRoute.path }]
+    : []),
 ];
 
 // Current path for active state
 const currentPath = Astro.url.pathname;
 
 // Check if we're on the landing page
-const isLandingPage = currentPath === '/' || currentPath === `/${locale}` || currentPath === `/${locale}/`;
+const isLandingPage =
+  currentPath === '/' || currentPath === `/${locale}` || currentPath === `/${locale}/`;
 
 // Process CTA href for landing page anchor links
-const ctaHref = cta.href?.startsWith('#') && !isLandingPage
-  ? `/${cta.href}`
-  : cta.href;
+const ctaHref = cta.href?.startsWith('#') && !isLandingPage ? `/${cta.href}` : cta.href;
 
 // Check slots
 const hasLogoSlot = Astro.slots.has('logo');
@@ -150,9 +151,9 @@ const positions: Record<NonNullable<Props['position']>, string> = {
 
 // Size variants (height)
 const sizes: Record<NonNullable<Props['size']>, string> = {
-  sm: 'h-12',    // 48px - compact
-  md: 'h-14',    // 56px - balanced
-  lg: 'h-16',    // 64px - spacious
+  sm: 'h-12', // 48px - compact
+  md: 'h-14', // 56px - balanced
+  lg: 'h-16', // 64px - spacious
 };
 
 // Background variants
@@ -170,19 +171,10 @@ const containerClasses: Record<NonNullable<Props['layout']>, string> = {
 };
 
 // Compute header classes
-const headerClasses = cn(
-  'z-50 w-full',
-  positions[position],
-  variants[variant],
-  className
-);
+const headerClasses = cn('z-50 w-full', positions[position], variants[variant], className);
 
 // Compute inner container classes
-const innerClasses = cn(
-  'mx-auto max-w-6xl px-6',
-  sizes[size],
-  containerClasses[layout]
-);
+const innerClasses = cn('mx-auto max-w-6xl px-6', sizes[size], containerClasses[layout]);
 
 // Check if a nav item is active
 function isActive(href: string): boolean {
@@ -199,165 +191,185 @@ const buttonId = `${menuId}-button`;
 <header class={headerClasses} {...attrs}>
   <div class={innerClasses}>
     {/* Logo */}
-    {!hideLogo && (
-      hasLogoSlot ? (
-        <slot name="logo" />
-      ) : (
-        <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
-          <Logo size={size === 'lg' ? 'md' : 'sm'} forceDark={isInvert} />
-          <span class={cn(
-            'font-display text-xl font-bold tracking-tight',
-            isInvert ? 'text-on-invert' : 'text-brand-500'
-          )}>
-            {logoText || siteConfig.name}
-          </span>
-        </a>
-      )
-    )}
+    {
+      !hideLogo &&
+        (hasLogoSlot ? (
+          <slot name="logo" />
+        ) : (
+          <a href={getLocalizedPath('home', locale)} class="flex items-center gap-2">
+            <Logo size={size === 'lg' ? 'md' : 'sm'} forceDark={isInvert} />
+            <span
+              class={cn(
+                'font-display text-xl font-bold tracking-tight',
+                isInvert ? 'text-on-invert' : 'text-brand-500'
+              )}
+            >
+              {logoText || siteConfig.name}
+            </span>
+          </a>
+        ))
+    }
 
     {/* Desktop Navigation */}
-    {layout !== 'minimal' && (
-      hasNavSlot ? (
-        <nav class="hidden items-center gap-1 md:flex" aria-label="Main navigation">
-          <slot name="nav" />
-        </nav>
-      ) : (
-        <nav class="hidden items-center gap-1 md:flex" aria-label="Main navigation">
-          {navItems.map(({ label, href }) => (
-            <a
-              href={href.startsWith('#') && !isLandingPage ? `/${href}` : href}
-              class={cn(
-                'nav-link px-3 py-2 text-sm rounded-md',
-                'transition-all duration-(--transition-fast)',
-                isActive(href)
-                  ? cn('nav-link-active font-semibold', isInvert ? 'text-on-invert bg-white/10' : 'text-foreground bg-secondary')
-                  : cn('nav-link-inactive font-medium', isInvert ? 'text-on-invert-secondary hover:text-on-invert hover:bg-white/10' : 'text-foreground-muted hover:text-foreground hover:bg-secondary/70')
-              )}
-              aria-current={isActive(href) ? 'page' : undefined}
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
-      )
-    )}
+    {
+      layout !== 'minimal' &&
+        (hasNavSlot ? (
+          <nav class="hidden items-center gap-1 md:flex" aria-label="Main navigation">
+            <slot name="nav" />
+          </nav>
+        ) : (
+          <nav class="hidden items-center gap-1 md:flex" aria-label="Main navigation">
+            {navItems.map(({ label, href }) => (
+              <a
+                href={href.startsWith('#') && !isLandingPage ? `/${href}` : href}
+                class={cn(
+                  'nav-link rounded-md px-3 py-2 text-sm',
+                  'transition-all duration-(--transition-fast)',
+                  isActive(href)
+                    ? cn(
+                        'nav-link-active font-semibold',
+                        isInvert ? 'text-on-invert bg-white/10' : 'text-foreground bg-secondary'
+                      )
+                    : cn(
+                        'nav-link-inactive font-medium',
+                        isInvert
+                          ? 'text-on-invert-secondary hover:text-on-invert hover:bg-white/10'
+                          : 'text-foreground-muted hover:text-foreground hover:bg-secondary/70'
+                      )
+                )}
+                aria-current={isActive(href) ? 'page' : undefined}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        ))
+    }
 
     {/* Actions Area */}
     <div class="flex items-center gap-2">
-      {hasActionsSlot ? (
-        <slot name="actions" />
-      ) : (
-        <>
-          {showLanguageSwitcher && <LanguageSwitcher />}
-          {showThemeToggle && <ThemeToggle />}
+      {
+        hasActionsSlot ? (
+          <slot name="actions" />
+        ) : (
+          <>
+            {showLanguageSwitcher && <LanguageSwitcher />}
+            {showThemeToggle && <ThemeToggle />}
 
-          {actions.map((action) => (
-            <Button
-              variant="ghost"
-              size="sm"
-              colorScheme={colorScheme}
-              icon={action.iconOnly}
-              href={action.href}
-              target={action.target}
-              aria-label={action.label}
-            >
-              <Icon name={action.icon} size="sm" />
-              {!action.iconOnly && action.label}
-            </Button>
-          ))}
+            {actions.map((action) => (
+              <Button
+                variant="ghost"
+                size="sm"
+                colorScheme={colorScheme}
+                icon={action.iconOnly}
+                href={action.href}
+                target={action.target}
+                aria-label={action.label}
+              >
+                <Icon name={action.icon} size="sm" />
+                {!action.iconOnly && action.label}
+              </Button>
+            ))}
 
-          {showCta && (
-            <Button size="sm" colorScheme={colorScheme} href={ctaHref}>
-              {cta.label}
-            </Button>
-          )}
-        </>
-      )}
+            {showCta && (
+              <Button size="sm" colorScheme={colorScheme} href={ctaHref}>
+                {cta.label}
+              </Button>
+            )}
+          </>
+        )
+      }
 
       {/* Mobile Menu Toggle */}
-      {showMobileMenu && layout !== 'minimal' && (
-        <button
-          type="button"
-          id={buttonId}
-          class={cn(
-            'md:hidden inline-flex items-center justify-center rounded-md p-2',
-            isInvert
-              ? 'text-on-invert-secondary hover:text-on-invert hover:bg-white/10'
-              : 'text-foreground-muted hover:text-foreground hover:bg-secondary',
-            'transition-colors',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
-          )}
-          aria-expanded="false"
-          aria-controls={menuId}
-          aria-label="Toggle menu"
-        >
-          <span class="menu-icon">
-            <Icon name="menu" size="md" />
-          </span>
-          <span class="close-icon hidden">
-            <Icon name="x" size="md" />
-          </span>
-        </button>
-      )}
+      {
+        showMobileMenu && layout !== 'minimal' && (
+          <button
+            type="button"
+            id={buttonId}
+            class={cn(
+              'inline-flex items-center justify-center rounded-md p-2 md:hidden',
+              isInvert
+                ? 'text-on-invert-secondary hover:text-on-invert hover:bg-white/10'
+                : 'text-foreground-muted hover:text-foreground hover:bg-secondary',
+              'transition-colors',
+              'focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none'
+            )}
+            aria-expanded="false"
+            aria-controls={menuId}
+            aria-label="Toggle menu"
+          >
+            <span class="menu-icon">
+              <Icon name="menu" size="md" />
+            </span>
+            <span class="close-icon hidden">
+              <Icon name="x" size="md" />
+            </span>
+          </button>
+        )
+      }
     </div>
   </div>
 
   {/* Mobile Menu */}
-  {showMobileMenu && layout !== 'minimal' && (
-    hasMobileMenuSlot ? (
-      <div
-        id={menuId}
-        class="md:hidden hidden border-t border-border bg-background shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] opacity-0 origin-top scale-y-0"
-        role="navigation"
-        aria-label="Mobile navigation"
-      >
-        <slot name="mobile-menu" />
-      </div>
-    ) : (
-      <div
-        id={menuId}
-        class="md:hidden hidden border-t border-border bg-background shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] opacity-0 origin-top scale-y-0"
-        role="navigation"
-        aria-label="Mobile navigation"
-      >
-        <div class="mx-auto max-w-6xl px-6 py-4 space-y-1">
-          {navItems.map(({ label, href }) => (
-            <a
-              href={href.startsWith('#') && !isLandingPage ? `/${href}` : href}
-              class={cn(
-                'mobile-nav-link block px-3 py-2 rounded-md text-sm',
-                'transition-all duration-(--transition-fast)',
-                isActive(href)
-                  ? 'mobile-nav-link-active font-semibold bg-secondary text-foreground'
-                  : 'mobile-nav-link-inactive font-medium text-foreground-muted hover:bg-secondary/70 hover:text-foreground'
-              )}
-              aria-current={isActive(href) ? 'page' : undefined}
-            >
-              {label}
-            </a>
-          ))}
-
-          {showCta && (
-            <div class="mt-3 pt-3 border-t border-border">
-              <Button fullWidth href={ctaHref}>
-                {cta.label}
-              </Button>
-            </div>
-          )}
+  {
+    showMobileMenu &&
+      layout !== 'minimal' &&
+      (hasMobileMenuSlot ? (
+        <div
+          id={menuId}
+          class="border-border bg-background hidden origin-top scale-y-0 border-t opacity-0 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] md:hidden"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
+          <slot name="mobile-menu" />
         </div>
-      </div>
-    )
-  )}
+      ) : (
+        <div
+          id={menuId}
+          class="border-border bg-background hidden origin-top scale-y-0 border-t opacity-0 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)] md:hidden"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
+          <div class="mx-auto max-w-6xl space-y-1 px-6 py-4">
+            {navItems.map(({ label, href }) => (
+              <a
+                href={href.startsWith('#') && !isLandingPage ? `/${href}` : href}
+                class={cn(
+                  'mobile-nav-link block rounded-md px-3 py-2 text-sm',
+                  'transition-all duration-(--transition-fast)',
+                  isActive(href)
+                    ? 'mobile-nav-link-active bg-secondary text-foreground font-semibold'
+                    : 'mobile-nav-link-inactive text-foreground-muted hover:bg-secondary/70 hover:text-foreground font-medium'
+                )}
+                aria-current={isActive(href) ? 'page' : undefined}
+              >
+                {label}
+              </a>
+            ))}
+
+            {showCta && (
+              <div class="border-border mt-3 border-t pt-3">
+                <Button fullWidth href={ctaHref}>
+                  {cta.label}
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      ))
+  }
 </header>
 
 {/* Mobile Menu Backdrop - positioned outside header to blur page content */}
-{showMobileMenu && layout !== 'minimal' && (
-  <div
-    id={`${menuId}-backdrop`}
-    class="md:hidden fixed inset-0 opacity-0 pointer-events-none transition-opacity duration-200 z-40"
-    aria-hidden="true"
-  />
-)}
+{
+  showMobileMenu && layout !== 'minimal' && (
+    <div
+      id={`${menuId}-backdrop`}
+      class="pointer-events-none fixed inset-0 z-40 opacity-0 transition-opacity duration-200 md:hidden"
+      aria-hidden="true"
+    />
+  )
+}
 
 <script define:vars={{ menuId, buttonId }}>
   function initMobileMenu() {
