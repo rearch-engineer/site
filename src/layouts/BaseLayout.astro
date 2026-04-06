@@ -141,24 +141,24 @@ for (const locale of locales) {
     <!-- Browser language detection: redirect to matching locale if on default-locale page -->
     <script is:inline define:vars={{ langRouteMap, defaultLocale }}>
       (function () {
-        var path = window.location.pathname.replace(/\/+$/, '') || '/';
-        var segments = path.split('/').filter(Boolean);
+        const path = window.location.pathname.replace(/\/+$/, '') || '/';
+        const segments = path.split('/').filter(Boolean);
 
         // Only redirect if we're on a default-locale page (no locale prefix)
-        var supportedLocales = Object.keys(langRouteMap);
+        const supportedLocales = Object.keys(langRouteMap);
         if (segments.length > 0 && supportedLocales.indexOf(segments[0]) !== -1) {
           return; // Already on a non-default locale page
         }
 
         // Get browser languages
-        var browserLangs = navigator.languages
-          ? Array.prototype.slice.call(navigator.languages)
-          : [navigator.language || ''];
+        const browserLangs = navigator.languages
+    ? Array.prototype.slice.call(navigator.languages)
+    : [navigator.language || ''];
 
         // Find the first matching supported locale
-        var matchedLocale = null;
-        for (var i = 0; i < browserLangs.length; i++) {
-          var lang = browserLangs[i].toLowerCase();
+        let matchedLocale = null;
+        for (let i = 0; i < browserLangs.length; i++) {
+          const lang = browserLangs[i].toLowerCase();
 
           // Skip if it matches the default locale (e.g. "en", "en-US")
           if (lang === defaultLocale || lang.indexOf(defaultLocale + '-') === 0) {
@@ -170,7 +170,7 @@ for (const locale of locales) {
             matchedLocale = lang;
             break;
           }
-          var prefix = lang.split('-')[0];
+          const prefix = lang.split('-')[0];
           if (supportedLocales.indexOf(prefix) !== -1) {
             matchedLocale = prefix;
             break;
@@ -179,22 +179,22 @@ for (const locale of locales) {
 
         if (!matchedLocale) return;
 
-        var routeMap = langRouteMap[matchedLocale];
+        const routeMap = langRouteMap[matchedLocale];
         // Current slug is the path without leading slash
-        var currentSlug = segments.join('/');
+        const currentSlug = segments.join('/');
 
         // Check if the first segment matches a known route for slug translation
-        var firstSegment = segments[0] || '';
-        var translatedFirstSegment = routeMap[firstSegment];
+        const firstSegment = segments[0] || '';
+        const translatedFirstSegment = routeMap[firstSegment];
 
-        var targetPath;
+        let targetPath;
         if (currentSlug === '' || currentSlug === '/') {
           // Home page
           targetPath = '/' + matchedLocale + '/';
         } else if (translatedFirstSegment !== undefined) {
           // Known route - translate the first segment, keep the rest (e.g. blog post slugs)
-          var rest = segments.slice(1).join('/');
-          var translatedSlug = translatedFirstSegment;
+          const rest = segments.slice(1).join('/');
+          const translatedSlug = translatedFirstSegment;
           targetPath = '/' + matchedLocale + (translatedSlug ? '/' + translatedSlug : '');
           if (rest) {
             targetPath += '/' + rest;
