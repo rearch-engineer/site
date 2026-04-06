@@ -66,6 +66,13 @@ export const routes = {
     nav: { show: true, order: 2, label: 'nav.blog' },
   },
 
+  // Cloud page
+  cloud: {
+    en: 'cloud',
+    es: 'cloud',
+    nav: { show: false, order: 5, label: 'nav.getStarted' },
+  },
+
   // Legal pages (not shown in nav)
   'legal-notice': {
     en: 'legal/legal-notice',

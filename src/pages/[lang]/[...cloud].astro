@@ -1,0 +1,122 @@
+---
+/**
+ * Cloud Page (i18n version)
+ * URL: /{lang}/cloud
+ */
+import LandingLayout from '@/layouts/LandingLayout.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Button from '@/components/ui/form/Button/Button.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import { Hero } from '@/components/hero';
+import { locales, defaultLocale, isValidLocale, type Locale } from '@/i18n/config';
+import { useTranslations, routes } from '@/i18n/index';
+
+export function getStaticPaths() {
+  const paths = [];
+
+  for (const lang of locales) {
+    if (lang === defaultLocale) continue;
+
+    const slug = routes.cloud[lang];
+    paths.push({
+      params: { lang, cloud: slug },
+    });
+  }
+
+  return paths;
+}
+
+const { lang } = Astro.params;
+
+if (!lang || !isValidLocale(lang)) {
+  return Astro.redirect('/cloud');
+}
+
+const locale = lang as Locale;
+const t = useTranslations(locale);
+
+const contactSlug = routes.contact[locale];
+
+const audiences = [
+  {
+    icon: 'users' as const,
+    title: t('cloud.audiences.individuals.title'),
+    description: t('cloud.audiences.individuals.description'),
+  },
+  {
+    icon: 'box' as const,
+    title: t('cloud.audiences.small.title'),
+    description: t('cloud.audiences.small.description'),
+  },
+  {
+    icon: 'shield' as const,
+    title: t('cloud.audiences.enterprise.title'),
+    description: t('cloud.audiences.enterprise.description'),
+  },
+];
+---
+
+<LandingLayout
+  title={t('cloud.meta.title')}
+  description={t('cloud.meta.description')}
+  lang={locale}
+  routeId="cloud"
+>
+  <Hero layout="centered" size="sm" showGrid>
+    <h1 slot="title">
+      {t('cloud.hero.title')}
+      <span class="text-brand-500">{t('cloud.hero.titleHighlight')}</span>
+    </h1>
+
+    <p slot="description">
+      {t('cloud.hero.description')}
+    </p>
+  </Hero>
+
+  <!-- Audiences Section -->
+  <section class="bg-surface-secondary py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-16 text-center">
+        <h2 class="font-display text-foreground text-3xl font-bold md:text-4xl">
+          {t('cloud.audiences.title')}
+          <span class="text-brand-500">{t('cloud.audiences.titleHighlight')}</span>
+        </h2>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-3">
+        {audiences.map((audience) => (
+          <Card padding="lg" hover>
+            <div class="flex flex-col items-center text-center">
+              <div class="from-brand-500/20 to-brand-500/5 text-brand-500 mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br">
+                <Icon name={audience.icon} size="lg" />
+              </div>
+              <h3 class="font-display text-foreground mb-3 text-xl font-bold">
+                {audience.title}
+              </h3>
+              <p class="text-foreground-muted leading-relaxed">
+                {audience.description}
+              </p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <h2 class="font-display text-foreground mb-4 text-3xl font-bold md:text-4xl">
+        {t('cloud.cta.title')}
+        <span class="text-brand-500">{t('cloud.cta.titleHighlight')}</span>
+      </h2>
+      <p class="text-foreground-muted mx-auto mb-8 max-w-xl text-lg leading-relaxed">
+        {t('cloud.cta.description')}
+      </p>
+      <Button size="lg" href={`/${locale}/${contactSlug}`}>
+        {t('cloud.cta.contact')}
+        <Icon name="arrow-right" size="sm" />
+      </Button>
+    </div>
+  </section>
+</LandingLayout>

@@ -208,7 +208,7 @@ export const en = {
       },
       github: {
         label: 'GitHub',
-        value: 'github.com/lab34-es/rearch.engineer',
+        value: 'github.com/rearch-engineer',
       },
       twitter: {
         label: 'Twitter',
@@ -436,6 +436,48 @@ export const en = {
         'These components are just the beginning. Explore the full ReArch component library.',
       cloneRepo: 'View on GitHub',
       readDocs: 'Read Documentation',
+    },
+  },
+
+  // Cloud page
+  cloud: {
+    meta: {
+      title: 'ReArch Cloud',
+      description:
+        'Let Lab34 manage your ReArch infrastructure. For individuals, startups, and enterprises.',
+    },
+    hero: {
+      badge: 'Managed Infrastructure',
+      title: 'Focus on building.',
+      titleHighlight: 'We handle the rest.',
+      description:
+        'Let Lab34 take care of your ReArch infrastructure so you can focus on what matters — shipping code.',
+    },
+    audiences: {
+      title: 'Built for everyone.',
+      titleHighlight: 'From solo devs to enterprises.',
+      individuals: {
+        title: 'Individuals',
+        description:
+          'Get started without the overhead. Lab34 manages your ReArch environment so you can focus on your projects, not infrastructure.',
+      },
+      small: {
+        title: 'Small Companies',
+        description:
+          'Scale your engineering output without scaling your ops team. Lab34 handles deployment, monitoring, and maintenance of your ReArch setup.',
+      },
+      enterprise: {
+        title: 'Enterprises',
+        description:
+          'Enterprise-grade reliability, security, and compliance. Lab34 ensures your ReArch infrastructure meets the demands of large-scale organizations.',
+      },
+    },
+    cta: {
+      title: 'Ready to get started?',
+      titleHighlight: "Let's talk.",
+      description:
+        'Contact us to learn how Lab34 can manage your ReArch infrastructure — tailored to your team and your needs.',
+      contact: 'Contact Us',
     },
   },
 

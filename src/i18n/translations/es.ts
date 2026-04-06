@@ -210,7 +210,7 @@ export const es: TranslationKeys = {
       },
       github: {
         label: 'GitHub',
-        value: 'github.com/lab34-es/rearch.engineer',
+        value: 'github.com/rearch-engineer',
       },
       twitter: {
         label: 'Twitter',
@@ -442,6 +442,48 @@ export const es: TranslationKeys = {
         'Estos componentes son solo el comienzo. Explora la biblioteca completa de componentes de ReArch.',
       cloneRepo: 'Ver en GitHub',
       readDocs: 'Leer Documentación',
+    },
+  },
+
+  // Cloud page
+  cloud: {
+    meta: {
+      title: 'ReArch Cloud',
+      description:
+        'Deja que Lab34 gestione tu infraestructura ReArch. Para individuos, startups y grandes empresas.',
+    },
+    hero: {
+      badge: 'Infraestructura Gestionada',
+      title: 'Enfocate en construir.',
+      titleHighlight: 'Nosotros nos encargamos del resto.',
+      description:
+        'Deja que Lab34 se encargue de tu infraestructura ReArch para que puedas centrarte en lo que importa — entregar codigo.',
+    },
+    audiences: {
+      title: 'Para todos.',
+      titleHighlight: 'Desde desarrolladores independientes hasta grandes empresas.',
+      individuals: {
+        title: 'Individuos',
+        description:
+          'Empieza sin complicaciones. Lab34 gestiona tu entorno ReArch para que puedas centrarte en tus proyectos, no en la infraestructura.',
+      },
+      small: {
+        title: 'Pequenas Empresas',
+        description:
+          'Escala tu capacidad de desarrollo sin escalar tu equipo de operaciones. Lab34 se encarga del despliegue, monitoreo y mantenimiento de tu configuracion ReArch.',
+      },
+      enterprise: {
+        title: 'Grandes Empresas',
+        description:
+          'Fiabilidad, seguridad y cumplimiento a nivel empresarial. Lab34 garantiza que tu infraestructura ReArch cumpla con las exigencias de organizaciones a gran escala.',
+      },
+    },
+    cta: {
+      title: '¿Listo para empezar?',
+      titleHighlight: 'Hablemos.',
+      description:
+        'Contactanos para saber como Lab34 puede gestionar tu infraestructura ReArch — adaptada a tu equipo y tus necesidades.',
+      contact: 'Contactanos',
     },
   },
 
