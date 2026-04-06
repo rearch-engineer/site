@@ -46,7 +46,7 @@ export const es: TranslationKeys = {
   techStack: {
     astro: {
       name: 'En Segundo Plano',
-      desc: 'Agentesﬂ que trabajan mientras duermes',
+      desc: 'Agentes que trabajan mientras duermes',
     },
     tailwind: {
       name: 'Soporte MCP',
