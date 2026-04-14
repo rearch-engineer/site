@@ -77,11 +77,11 @@ export const es: TranslationKeys = {
           'Conecta tus repositorios de GitHub o Bitbucket. ReArch trabaja directamente con tu código existente — sin migración, sin dependencia de proveedor.',
       },
       models: {
-        label: 'Últimos Modelos Frontier',
-        desc: 'Modelos de IA de vanguardia',
-        title: 'Últimos Modelos Frontier',
+        label: 'Cualquier LLM',
+        desc: 'Modelos compatibles con OpenAI',
+        title: 'Cualquier LLM',
         content:
-          'Impulsado por los últimos modelos frontier de IA. ReArch aprovecha modelos de lenguaje de vanguardia para entender tu código, generar cambios e iterar sobre el feedback.',
+          'Compatible con cualquier LLM compatible con OpenAI. Usa modelos frontier como Claude, GPT, Gemini, y más — o trae el tuyo. ReArch aprovecha los mejores modelos de lenguaje para entender tu código, generar cambios e iterar sobre el feedback.',
       },
       preview: {
         label: 'Vista Previa en Vivo',
@@ -106,10 +106,10 @@ export const es: TranslationKeys = {
       },
       workspace: {
         label: 'Espacio de Trabajo',
-        desc: 'VS Code también disponible',
+        desc: 'Tus herramientas de desarrollo favoritas',
         title: 'Espacio de Trabajo',
         content:
-          'Trabaja directamente en el navegador o usa VS Code. ReArch proporciona una experiencia de desarrollo fluida donde prefieras programar.',
+          'Trabaja directamente en el navegador o intégralo con tus herramientas de desarrollo favoritas. ReArch proporciona una experiencia de desarrollo fluida donde prefieras programar.',
       },
     },
   },

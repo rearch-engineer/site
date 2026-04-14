@@ -75,11 +75,11 @@ export const en = {
           'Connect your GitHub or Bitbucket repositories. ReArch works directly with your existing codebase — no migration needed, no lock-in.',
       },
       models: {
-        label: 'Last Frontier Models',
-        desc: 'Cutting-edge AI models',
-        title: 'Last Frontier Models',
+        label: 'Any LLM, Your Choice',
+        desc: 'OpenAI-compatible models',
+        title: 'Any LLM, Your Choice',
         content:
-          'Powered by the latest frontier AI models. ReArch leverages cutting-edge language models to understand your code, generate changes, and iterate on feedback.',
+          'Works with any OpenAI-compatible LLM. Use frontier models like Claude, GPT, Gemini, and more — or bring your own. ReArch leverages the best language models to understand your code, generate changes, and iterate on feedback.',
       },
       preview: {
         label: 'Live Preview',
@@ -104,10 +104,10 @@ export const en = {
       },
       workspace: {
         label: 'Work Space',
-        desc: 'VS Code also available',
+        desc: 'Your favorite developer tools',
         title: 'Work Space',
         content:
-          'Work directly in the browser or use VS Code. ReArch provides a seamless development experience wherever you prefer to code.',
+          'Work directly in the browser or integrate with your favorite developer tools. ReArch provides a seamless development experience wherever you prefer to code.',
       },
     },
   },

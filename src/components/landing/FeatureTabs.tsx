@@ -51,20 +51,20 @@ const config = {
   },
   models: {
     lang: 'typescript',
-    code: `// Frontier model configuration
+    code: `// LLM configuration — any OpenAI-compatible provider
 const models = {
-  // Use the latest models available
+  // Use any OpenAI-compatible model
   primary: 'claude-sonnet-4-20250514',
   fallback: 'gpt-4o',
 
   // Model routing based on task complexity
   routing: {
     codegen: 'claude-sonnet-4-20250514',
-    review: 'claude-sonnet-4-20250514',
+    review: 'gemini-2.5-pro',
     planning: 'o1-preview',
   },
 
-  // Always up to date with latest releases
+  // Supports Anthropic, OpenAI, Google, and more
   autoUpgrade: true,
 };`,
     filename: 'config/models.ts',
@@ -147,15 +147,16 @@ const workspace = {
     theme: 'auto', // follows system preference
   },
 
-  // VS Code extension available
-  vscode: {
-    extension: 'rearch.rearch-vscode',
-    // Connect to running sessions from VS Code
+  // Integrate with your developer tools
+  integrations: {
+    ide: true,
+    cli: true,
+    // Connect to running sessions from your tools
     remoteAttach: true,
   },
 
   // Work from anywhere
-  environments: ['browser', 'vscode', 'cli'],
+  environments: ['browser', 'ide', 'cli'],
 };`,
     filename: 'config/workspace.ts',
   },
