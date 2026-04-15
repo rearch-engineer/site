@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  compressHTML: true,
   site: process.env.SITE_URL || 'https://example.com',
 
   // i18n configuration
