@@ -1,4 +1,7 @@
 ---
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/jetbrains-mono';
 import '@/styles/global.css';
 import SEO from '@/components/seo/SEO.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
@@ -92,20 +95,6 @@ for (const locale of locales) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- ReArch Fonts: Outfit (display), Manrope (body), JetBrains Mono (code) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Non-render-blocking font loading -->
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    </noscript>
-
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={siteConfig.branding.favicon.svg} />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -149,8 +138,8 @@ for (const locale of locales) {
 
         // Get browser languages
         const browserLangs = navigator.languages
-    ? Array.prototype.slice.call(navigator.languages)
-    : [navigator.language || ''];
+          ? Array.prototype.slice.call(navigator.languages)
+          : [navigator.language || ''];
 
         // Find the first matching supported locale
         let matchedLocale = null;
@@ -221,11 +210,11 @@ for (const locale of locales) {
     </script>
   </head>
 
-  <body class="min-h-screen bg-background text-foreground antialiased">
+  <body class="bg-background text-foreground min-h-screen antialiased">
     <!-- Skip to content link -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+      class="focus:bg-primary focus:text-primary-foreground sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2"
     >
       Skip to content
     </a>

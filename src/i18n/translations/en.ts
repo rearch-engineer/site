@@ -37,7 +37,6 @@ export const en = {
       'ReArch is an AI background agent that writes, tests, and ships code — so everyone on your team can build, not just engineers.',
     cta: 'Request Access',
     github: 'View on GitHub',
-    socialProof: 'Enabling teams to ship code across entire organizations',
   },
 
   // Tech Stack Section

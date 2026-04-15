@@ -39,7 +39,6 @@ export const es: TranslationKeys = {
       'ReArch es un agente de IA en segundo plano que escribe, prueba y despliega código — para que todos en tu equipo puedan construir, no solo los ingenieros.',
     cta: 'Solicitar Acceso',
     github: 'Ver en GitHub',
-    socialProof: 'Permitiendo a equipos entregar código en toda la organización',
   },
 
   // Tech Stack Section

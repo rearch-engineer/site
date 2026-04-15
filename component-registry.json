@@ -496,20 +496,6 @@
       },
       "premium": false
     },
-    "social-proof": {
-      "name": "SocialProof",
-      "category": "ui",
-      "subcategory": "marketing",
-      "files": [
-        "src/components/ui/marketing/SocialProof/SocialProof.astro",
-        "src/components/ui/marketing/SocialProof/index.ts"
-      ],
-      "dependencies": {
-        "utilities": ["cn"],
-        "components": []
-      },
-      "premium": false
-    },
     "terminal-demo": {
       "name": "TerminalDemo",
       "category": "ui",
@@ -611,10 +597,7 @@
     "header": {
       "name": "Header",
       "category": "layout",
-      "files": [
-        "src/components/layout/Header.astro",
-        "src/components/layout/header.variants.ts"
-      ],
+      "files": ["src/components/layout/Header.astro", "src/components/layout/header.variants.ts"],
       "dependencies": {
         "utilities": ["cn"],
         "components": ["button", "icon", "logo"]
@@ -624,10 +607,7 @@
     "footer": {
       "name": "Footer",
       "category": "layout",
-      "files": [
-        "src/components/layout/Footer.astro",
-        "src/components/layout/footer.variants.ts"
-      ],
+      "files": ["src/components/layout/Footer.astro", "src/components/layout/footer.variants.ts"],
       "dependencies": {
         "utilities": ["cn"],
         "components": ["icon", "logo"]

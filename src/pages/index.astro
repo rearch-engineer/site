@@ -8,7 +8,6 @@ import { Hero } from '@/components/hero';
 import Button from '@/components/ui/form/Button/Button.astro';
 import Badge from '@/components/ui/data-display/Badge/Badge.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
-import SocialProof from '@/components/ui/marketing/SocialProof/SocialProof.astro';
 import TechStack from '@/components/landing/TechStack.astro';
 import FeatureTabs from '@/components/landing/FeatureTabs.tsx';
 import Credibility from '@/components/landing/Credibility.astro';
@@ -59,7 +58,6 @@ const ctaLink = '/cloud';
       <p class="text-foreground-muted text-sm">Product screenshot coming soon</p>
     </div>
 
-    <SocialProof class="mt-[var(--space-stack-lg)]" text={t('hero.socialProof')} />
   </Hero>
 
   <TechStack locale={locale} />
