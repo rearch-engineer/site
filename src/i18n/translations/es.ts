@@ -186,23 +186,8 @@ export const es: TranslationKeys = {
       description:
         '¿Tienes una pregunta sobre ReArch, quieres solicitar acceso o simplemente saludar? Nos encantaría saber de ti.',
     },
-    form: {
-      title: 'Envíanos un mensaje',
-      name: 'Tu Nombre',
-      namePlaceholder: 'María García',
-      email: 'Correo Electrónico',
-      emailPlaceholder: 'maria@empresa.com',
-      subject: 'Asunto',
-      subjectPlaceholder: '¿Cómo podemos ayudarte?',
-      message: 'Mensaje',
-      messagePlaceholder: 'Cuéntanos sobre tu equipo y cómo quieres usar ReArch...',
-      submit: 'Enviar Mensaje',
-      sending: 'Enviando...',
-      success: '¡Mensaje enviado con éxito! Te responderemos pronto.',
-      error: 'Error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.',
-    },
     info: {
-      title: 'Otras formas de contactarnos',
+      title: 'Formas de contactarnos',
       email: {
         label: 'Correo',
         value: 'hello@rearch.engineer',

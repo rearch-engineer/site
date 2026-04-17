@@ -184,23 +184,8 @@ export const en = {
       description:
         'Have a question about ReArch, want to request access, or just want to say hello? We would love to hear from you.',
     },
-    form: {
-      title: 'Send us a message',
-      name: 'Your Name',
-      namePlaceholder: 'Jane Smith',
-      email: 'Email Address',
-      emailPlaceholder: 'jane@company.com',
-      subject: 'Subject',
-      subjectPlaceholder: 'How can we help?',
-      message: 'Message',
-      messagePlaceholder: 'Tell us about your team and how you want to use ReArch...',
-      submit: 'Send Message',
-      sending: 'Sending...',
-      success: 'Message sent successfully! We will get back to you soon.',
-      error: 'Failed to send message. Please try again later.',
-    },
     info: {
-      title: 'Other ways to reach us',
+      title: 'Ways to reach us',
       email: {
         label: 'Email',
         value: 'hello@rearch.engineer',

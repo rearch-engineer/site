@@ -5,10 +5,6 @@
  */
 import LandingLayout from '@/layouts/LandingLayout.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
-import Badge from '@/components/ui/data-display/Badge/Badge.astro';
-import Button from '@/components/ui/form/Button/Button.astro';
-import Input from '@/components/ui/form/Input/Input.astro';
-import Textarea from '@/components/ui/form/Textarea/Textarea.astro';
 import Card from '@/components/ui/data-display/Card/Card.astro';
 import { Hero } from '@/components/hero';
 import siteConfig from '@/config/site.config';
@@ -26,8 +22,6 @@ const t = useTranslations(locale);
   routeId="contact"
 >
   <Hero layout="centered" size="sm" showGrid>
-    <!--<Badge slot="badge" pill pulse>{t('contact.hero.badge')}</Badge>-->
-
     <h1 slot="title">
       {t('contact.hero.title')}
       <span class="text-brand-500">{t('contact.hero.titleHighlight')}</span>
@@ -38,162 +32,55 @@ const t = useTranslations(locale);
     </p>
   </Hero>
 
-  <!-- Contact Form Section -->
+  <!-- Contact Info Section -->
   <section class="bg-surface-secondary py-20">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-12 lg:grid-cols-2">
-        <!-- Form -->
-        <Card padding="lg">
-          <h2 class="font-display text-foreground mb-6 text-2xl font-bold">
-            {t('contact.form.title')}
-          </h2>
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-display text-foreground mb-8 text-center text-2xl font-bold">
+        {t('contact.info.title')}
+      </h2>
 
-          <form id="contact-form" action="/api/contact" method="POST" class="space-y-6">
-            <Input
-              label={t('contact.form.name')}
-              name="name"
-              type="text"
-              placeholder={t('contact.form.namePlaceholder')}
-              required
-              autocomplete="name"
-            />
-
-            <Input
-              label={t('contact.form.email')}
-              name="email"
-              type="email"
-              placeholder={t('contact.form.emailPlaceholder')}
-              required
-              autocomplete="email"
-            />
-
-            <Input
-              label={t('contact.form.subject')}
-              name="subject"
-              type="text"
-              placeholder={t('contact.form.subjectPlaceholder')}
-            />
-
-            <Textarea
-              label={t('contact.form.message')}
-              name="message"
-              placeholder={t('contact.form.messagePlaceholder')}
-              rows={5}
-              required
-            />
-
-            <!-- Honeypot field for spam protection -->
-            <div class="hidden" aria-hidden="true">
-              <input type="text" name="honeypot" tabindex="-1" autocomplete="off" />
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- Email -->
+        <a href={`mailto:${siteConfig.email}`} class="block">
+          <Card hover padding="lg">
+            <div class="flex flex-col items-center gap-3 text-center">
+              <div
+                class="from-brand-500/20 to-brand-500/5 text-brand-500 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br"
+              >
+                <Icon name="mail" size="md" />
+              </div>
+              <div>
+                <p class="text-foreground font-medium">{t('contact.info.email.label')}</p>
+                <p class="text-foreground-muted text-sm">{siteConfig.email}</p>
+              </div>
             </div>
+          </Card>
+        </a>
 
-            <div id="form-message" class="hidden text-sm"></div>
+        <!-- GitHub -->
+        <a
+          href="https://github.com/rearch-engineer"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block"
+        >
+          <Card hover padding="lg">
+            <div class="flex flex-col items-center gap-3 text-center">
+              <div
+                class="from-brand-500/20 to-brand-500/5 text-brand-500 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br"
+              >
+                <Icon name="github" size="md" />
+              </div>
+              <div>
+                <p class="text-foreground font-medium">{t('contact.info.github.label')}</p>
+                <p class="text-foreground-muted text-sm">github.com/rearch-engineer</p>
+              </div>
+            </div>
+          </Card>
+        </a>
 
-            <Button type="submit" class="w-full" id="submit-button">
-              <Icon name="mail" size="sm" />
-              {t('contact.form.submit')}
-            </Button>
-          </form>
-        </Card>
 
-        <!-- Contact Info -->
-        <div class="flex flex-col justify-center">
-          <h2 class="font-display text-foreground mb-8 text-2xl font-bold">
-            {t('contact.info.title')}
-          </h2>
-
-          <div class="space-y-6">
-            <!-- Email -->
-            <a href={`mailto:${siteConfig.email}`} class="block">
-              <Card hover padding="sm">
-                <div class="flex items-center gap-4">
-                  <div
-                    class="from-brand-500/20 to-brand-500/5 text-brand-500 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br"
-                  >
-                    <Icon name="mail" size="md" />
-                  </div>
-                  <div>
-                    <p class="text-foreground-muted text-sm">{t('contact.info.email.label')}</p>
-                    <p class="text-foreground font-medium">{siteConfig.email}</p>
-                  </div>
-                </div>
-              </Card>
-            </a>
-
-            <!-- GitHub -->
-            <a
-              href="https://github.com/rearch-engineer"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block"
-            >
-              <Card hover padding="sm">
-                <div class="flex items-center gap-4">
-                  <div
-                    class="from-brand-500/20 to-brand-500/5 text-brand-500 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br"
-                  >
-                    <Icon name="github" size="md" />
-                  </div>
-                  <div>
-                    <p class="text-foreground-muted text-sm">{t('contact.info.github.label')}</p>
-                    <p class="text-foreground font-medium">github.com/rearch-engineer</p>
-                  </div>
-                </div>
-              </Card>
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 </LandingLayout>
-
-<script>
-  function initContactForm() {
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    const button = document.getElementById('submit-button') as HTMLButtonElement;
-    const message = document.getElementById('form-message') as HTMLDivElement;
-
-    if (!form || !button || !message) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      button.disabled = true;
-      button.textContent = 'Sending...';
-      message.classList.add('hidden');
-
-      try {
-        const formData = new FormData(form);
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          body: formData,
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          message.textContent = 'Message sent successfully! We will get back to you soon.';
-          message.className = 'text-sm text-success';
-          form.reset();
-        } else {
-          const errors = data.errors
-            ? Object.values(data.errors).flat().join(', ')
-            : 'Something went wrong';
-          message.textContent = errors;
-          message.className = 'text-sm text-destructive';
-        }
-      } catch {
-        message.textContent = 'Failed to send message. Please try again later.';
-        message.className = 'text-sm text-destructive';
-      } finally {
-        button.disabled = false;
-        button.textContent = 'Send Message';
-        message.classList.remove('hidden');
-      }
-    });
-  }
-
-  initContactForm();
-  document.addEventListener('astro:after-swap', initContactForm);
-</script>
